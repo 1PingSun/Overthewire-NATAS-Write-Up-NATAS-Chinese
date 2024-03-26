@@ -1,5 +1,5 @@
 # NATAS Write-up（NATAS 中文解答）
-[TOC]
+
 ## [NATAS 0](http://natas0.natas.labs.overthewire.org)
 > - Link: http://natas0.natas.labs.overthewire.org
 > - Username: natas0
@@ -117,8 +117,9 @@
 > - Username: natas10
 > - Password: D44EcsFkLxPIkAAKLosx8z3hxX1Z4MCE
 
-1. 
-
+1. 在這關中，因為禁止了一些字元的輸入，所以無法像 NATAS 9 一樣利用分號隔開指令，並任意執行。
+2. 但仍可用正規表達式中的 `.*` 輸出檔案中的所有內容。
+3. 在輸入框中輸入 `".*" /etc/natas_webpass/natas11` 後，就在輸出的第一行得到 NATAS 11 的密碼了。
 
 ## [NATAS 11](http://natas11.natas.labs.overthewire.org)
 > - Link: http://natas11.natas.labs.overthewire.org

@@ -91,7 +91,7 @@
 1. 點擊 `View soursecode` 查看後端 php 原始碼。
 2. 有一個函式 `encodeSecret()` 會將輸入的值，經過以下處理並回傳：
 
-    1. 進行 base64 編碼
+    1. 進行 Base64 編碼
     2. 將字串反轉
     3. 將二進位轉換成十六進位
 3. 查看主函式發現讓輸入框中的文字經過 `encodeSecret()` 函式計算後，只要與 `$encodedSecret` 相等，就能得到 NATAS 9 的密碼。
@@ -99,7 +99,7 @@
 
     1. 十六進位轉二進位
     2. 字串反轉
-    3. base64 解碼
+    3. Base64 解碼
 5. 將上一點的解碼 `oubWYf2kBq` 貼上輸入框並送出，就得到 NATAS 9 的密碼了。
 ## [NATAS 9](http://natas9.natas.labs.overthewire.org)
 > - Link: http://natas9.natas.labs.overthewire.org
@@ -159,8 +159,38 @@ graph TD;
     P --> Q; 
 ```
 
-2. 由上流程圖可知需將 Cookie 中的 data
-
+2. 由上流程圖可知將 Cookie 中 data 的 showpassword 值設定為 yes 即可獲得 NATAS 12 的密碼。
+3. 在將 showpassword 的值設定成 yes 之前，必須先得知 XOR 的 Key。
+4. 目前 Cookie 中的 data 值為預設的值，所以我們可以將以下兩物件進行 XOR 運算，即可得到 Key。
+    1. 預設值轉換成 JSON 格式
+    2. data 值進行 Base64 的解密
+5. 可透過以下程式獲得預設值的 JSON 格式。
+    ```
+    <?php
+        $a = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+        echo json_encode($a);
+    ?>
+    ```
+6. 獲得預設值的 JSON 格式為：`{"showpassword":"no","bgcolor":"#ffffff"}`。
+7. 將 Cookie 中 data 值進行 Base64 解密後，得到：`0l;$$98-8=?#9*jvi 'ngl*+(!$#9lrnh(.*-(.n67`。
+8. 將其進行 XOR 運算後得到 Key 為：`KNHL`，可透過稍作修改該網頁至 php 原始碼進行 XOR 運算，範例程式如下：
+    ```
+    <?php
+        $text1 = '{"showpassword":"no","bgcolor":"#ffffff"}';
+        $text2 = "0l;$$98-8=?#9*jvi 'ngl*+(!$#9lrnh(.*-(.n67";
+        $key = '';
+        
+        for($i=0;$i<strlen($text1);$i++) {
+            $key .= $text1[$i] ^ $text2[$i % strlen($text1)];
+        }
+        
+        echo $key;
+    ?>
+    ```
+9. 將 `{"showpassword":"yes","bgcolor":"#ffffff"}` 與 Key 值：`KNHL` 進行 XOR 運算後，得到運算結果為：`0l;$$98-8=?#9*jvi7-?ibj.,-' $<jvim.*-(.*i3`。
+10. 將 XOR 運算後的值進行 Base64 編碼得到：`MGw7JCQ5OC04PT8jOSpqdmk3LT9pYmouLC0nICQ8anZpbS4qLSguKmkz`。
+11. 將其設定為 Cookie 的 data 值後重新整理，就得到 NATAS 12 的密碼了！恭喜你完成了一個困難的任務 XD。
+   
 ## [NATAS 12](http://natas12.natas.labs.overthewire.org)
 > - Link: http://natas12.natas.labs.overthewire.org
 > - Username: natas12

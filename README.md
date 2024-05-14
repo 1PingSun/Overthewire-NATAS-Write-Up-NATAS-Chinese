@@ -126,6 +126,41 @@
 > - Username: natas11
 > - Password: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
 
+1. 觀察原始碼，以下是原始碼之邏輯流程圖。
+
+```mermaid
+graph TD;
+    subgraph loadData Function
+        A([開始]);
+        A --> B{篩選各種不是很重要的判斷式};
+        B -- Yes --> C[/讀取 Cookie 中 $data 值/];
+        C --> D[對其進行 Base64 解密];
+        D --> E[對其再進行 XOR 運算（尚不知道 Key 值）];
+        E --> F[將其 JSON 格式轉換成 Array];
+        F --> J[/回傳解碼後之值/]
+        B -- No --> G[/回傳預設值/];
+    end
+    subgraph 設定背景色
+        G --> H[將 Cookie 中 $data 的背景色值，設定成前端輸入框的值];
+        J --> H;
+    end
+    subgraph 回傳 Cookie
+        H --> I[/讀取 $data 解密後的值/];
+        I --> K[將其 Array 格式轉換成 JSON 格式];
+        K --> L[對其進行 XOR 運算（與 loadData Function 的 Key 值相同）];
+        L --> M[對其進行 Base64 加密];
+        M --> N[/回傳至前端編碼後的 Cookie/];
+    end
+    subgraph 顯示 NATAS 12 之密碼
+        N --> O{判斷 $data 中的 showpassword 值是否為 yes};
+        O -- Yes --> P[/回傳 NATAS 12 密碼並顯示在前端/];
+    end
+    O -- No --> Q([結束]);
+    P --> Q; 
+```
+
+2. 由上流程圖可知需將 Cookie 中的 data
+
 ## [NATAS 12](http://natas12.natas.labs.overthewire.org)
 > - Link: http://natas12.natas.labs.overthewire.org
 > - Username: natas12

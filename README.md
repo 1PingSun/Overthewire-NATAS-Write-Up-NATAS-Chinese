@@ -10,7 +10,7 @@
 ## [NATAS 1](http://natas1.natas.labs.overthewire.org)
 > - Link: http://natas1.natas.labs.overthewire.org
 > - Username: natas1
-> - Password: g9D9cREhslqBKtcA2uocGHPfMZVzeFK6
+> - Password: 0nzCigAq7t2iALyvU9xcHlYN4MlkIwlq
 
 1. 這題禁止使用右鍵，所以打不開開發者工具，可以用以下兩種方法開啟開發者工具：
     - 按鍵盤上的 F12 鍵打開開發者工具
@@ -21,7 +21,8 @@
 ## [NATAS 2](http://natas2.natas.labs.overthewire.org)
 > - Link: http://natas2.natas.labs.overthewire.org
 > - Username: natas2
-> - Password: h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7
+> - Password: TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI
+
 1. 在 Developer Tools 中的 Sources 分頁可以看到一個 `files` 的資料夾，當中只有一個 `pixel.png` 的檔案，故思考 `files` 資料夾中是否有其他檔案。
 2. 在網址列後方加入 `/files` 變成 `http://natas2.natas.labs.overthewire.org/files` 後，發現還有一個 `users.txt` 的檔案。
 3. 點擊打開 `users.txt` 後，就看到 NATAS 3 的密碼了。
@@ -29,7 +30,7 @@
 ## [NATAS 3](http://natas3.natas.labs.overthewire.org)
 > - Link: http://natas3.natas.labs.overthewire.org
 > - Username: natas3
-> - Password: G6ctbMJ5Nb4cbFwhpMPSvxGHhQ7I6W8Q
+> - Password: 3gqisGdR0pjm6tpkDKdIWO2hSvchLeYH
 1. 打開原始碼後看到 `<!-- No more information leaks!! Not even Google will find it this time... -->`。
 2. 不讓 Google 搜尋顯示網站的方法有兩種：
 
@@ -47,15 +48,15 @@
 ## [NATAS 4](http://natas4.natas.labs.overthewire.org)
 > - Link: http://natas4.natas.labs.overthewire.org
 > - Username: natas4
-> - Password: tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm
+> - Password: QryZXc2e0zahULdHrtHxzyYkj59kUxLQ
 
 1. 網頁顯示僅允許來自 `http://natas5.natas.labs.overthewire.org/` 的使用者存取。
-2. 打開 Developer Tools 的 Network 分頁後，看到 `index.php` 封包中有一個 `Host` 標籤，透過 [`ModHeader`](https://chromewebstore.google.com/detail/modheader-modify-http-hea/idgpnmonknjnojddfkpgkljpfnnfcklj) 等工具，`Referer` 的內容改成 `http://natas5.natas.labs.overthewire.org/`，點擊網頁中的 `Refresh page`，即可看到 NATAS 5 的密碼。
+2. 打開 Developer Tools 的 Network 分頁後，看到 `index.php` 封包中有一個 `Host` 標籤，透過 [`ModHeader`](https://chromewebstore.google.com/detail/modheader-modify-http-hea/idgpnmonknjnojddfkpgkljpfnnfcklj) 等工具，將 `Referer` 的內容改成 `http://natas5.natas.labs.overthewire.org/`，點擊網頁中的 `Refresh page`，即可看到 NATAS 5 的密碼。
 
 ## [NATAS 5](http://natas5.natas.labs.overthewire.org)
 > - Link: http://natas5.natas.labs.overthewire.org
 > - Username: natas5
-> - Password: Z0NsrtIkJoKALBCLi5eqFfcRN82Au2oD
+> - Password: 0n35PkggAPm2zbEpOU802c0x0Msn1ToK
 
 1. 網頁顯示沒有登入。
 2. 打開 Developer Tools 的 Application 分頁，看到 Cookie 中有一個 `loggedin` 的值為 `0`。

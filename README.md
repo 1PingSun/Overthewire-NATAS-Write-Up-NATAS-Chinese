@@ -173,12 +173,11 @@ graph TD;
     ?>
     ```
 6. 獲得預設值的 JSON 格式為：`{"showpassword":"no","bgcolor":"#ffffff"}`。
-7. 將 Cookie 中 data 值進行 Base64 解密後，得到：`0l;$$98-8=?#9*jvi 'ngl*+(!$#9lrnh(.*-(.n67`。
-8. 將其進行 XOR 運算後得到 Key 為：`KNHL`，可透過稍作修改該網頁至 php 原始碼進行 XOR 運算，範例程式如下：
+7. 將 Cookie 中 data 值進行 Base64 解密後，與上方 JSON 資料進行 XOR 運算後得到 Key 為：`eDWo`，可透過稍作修改該網頁之 php 原始碼進行 XOR 運算，範例程式如下：
     ```
     <?php
         $text1 = '{"showpassword":"no","bgcolor":"#ffffff"}';
-        $text2 = "0l;$$98-8=?#9*jvi 'ngl*+(!$#9lrnh(.*-(.n67";
+        $text2 = base64_decode("HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D");
         $key = '';
         
         for($i=0;$i<strlen($text1);$i++) {
@@ -188,14 +187,13 @@ graph TD;
         echo $key;
     ?>
     ```
-9. 將 `{"showpassword":"yes","bgcolor":"#ffffff"}` 與 Key 值：`KNHL` 進行 XOR 運算後，得到運算結果為：`0l;$$98-8=?#9*jvi7-?ibj.,-' $<jvim.*-(.*i3`。
-10. 將 XOR 運算後的值進行 Base64 編碼得到：`MGw7JCQ5OC04PT8jOSpqdmk3LT9pYmouLC0nICQ8anZpbS4qLSguKmkz`。
-11. 將其設定為 Cookie 的 data 值後重新整理，就得到 NATAS 12 的密碼了！恭喜你完成了一個困難的任務 XD。
+9. 將 `{"showpassword":"yes","bgcolor":"#ffffff"}` 與 Key 值：`eDWo` 進行 XOR 運算後，進行 Base64 編碼得到：`HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZzEJAyIxCUc5`。
+10. 將其設定為 Cookie 的 data 值後重新整理，就得到 NATAS 12 的密碼了！恭喜你完成了一個困難的任務 XD。
    
 ## [NATAS 12](http://natas12.natas.labs.overthewire.org)
 > - Link: http://natas12.natas.labs.overthewire.org
 > - Username: natas12
-> - Password: YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG
+> - Password: yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB
 
 ## [NATAS 13](http://natas13.natas.labs.overthewire.org)
 > - Link: http://natas13.natas.labs.overthewire.org

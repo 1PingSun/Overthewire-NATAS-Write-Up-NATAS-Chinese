@@ -65,7 +65,7 @@
 ## [NATAS 6](http://natas6.natas.labs.overthewire.org)
 > - Link: http://natas6.natas.labs.overthewire.org
 > - Username: natas6
-> - Password: fOIvE0MDtPTgRhqmmvvAOt2EfXR6uQgR
+> - Password: 0RoJwHdSKWFTYR5WuiAewauSuNaBXned
 
 1. 點擊 `View sourcecode`後，打開網頁後端原始碼。
 2. 發現要讓網頁吐出 NATAS 7 密碼的方式，就是讓 `$secret` 與 `$_POST['secret']` 的內容相符。也就是說：網頁中輸入框的文字必須與 `$secret` 相符。
@@ -77,7 +77,7 @@
 ## [NATAS 7](http://natas7.natas.labs.overthewire.org)
 > - Link: http://natas7.natas.labs.overthewire.org
 > - Username: natas7
-> - Password: jmxSiH3SP6Sonf8dv66ng8v1cIEdjXWr
+> - Password: bmg8SvU1LizuWjx3y7xkNERkHxGre0GS
 
 1. 點擊 `Home` 或 `About` 後，發現連結中的 `page` 參數會隨之改變。
 2. 嘗試改變 `page` 參數後，會發現顯示錯誤訊息：找不到這樣的路徑。
@@ -87,7 +87,7 @@
 ## [NATAS 8](http://natas8.natas.labs.overthewire.org)
 > - Link: http://natas8.natas.labs.overthewire.org
 > - Username: natas8
-> - Password: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
+> - Password: xcoXLmzMkoIP9D7hlgPlh9XD7OgLAe5Q
 
 1. 點擊 `View soursecode` 查看後端 php 原始碼。
 2. 有一個函式 `encodeSecret()` 會將輸入的值，經過以下處理並回傳：
@@ -105,7 +105,7 @@
 ## [NATAS 9](http://natas9.natas.labs.overthewire.org)
 > - Link: http://natas9.natas.labs.overthewire.org
 > - Username: natas9
-> - Password: Sda6t0vkOPkM8YeOZkAGVhFoaplvlJFd
+> - Password: ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t
 
 1. 打開網頁 php 原始碼，看到 `passthru()` 函式，這個函式可以執行任何 shell 指令。
 2. 由程式碼可看出，該行程式會在 `dictionary.txt` 中尋找字串，而尋找的字串即為輸入框輸入的值。
@@ -116,7 +116,7 @@
 ## [NATAS 10](http://natas10.natas.labs.overthewire.org)
 > - Link: http://natas10.natas.labs.overthewire.org
 > - Username: natas10
-> - Password: D44EcsFkLxPIkAAKLosx8z3hxX1Z4MCE
+> - Password: t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu
 
 1. 在這關中，因為禁止了一些字元的輸入，所以無法像 NATAS 9 一樣利用分號隔開指令，並任意執行。
 2. 但仍可用正規表達式中的 `.*` 輸出檔案中的所有內容。
@@ -125,7 +125,7 @@
 ## [NATAS 11](http://natas11.natas.labs.overthewire.org)
 > - Link: http://natas11.natas.labs.overthewire.org
 > - Username: natas11
-> - Password: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
+> - Password: UJdqkK1pTu6VLt9UHWAgRZz6sVUZ3lEk
 
 1. 觀察原始碼，以下是原始碼之邏輯流程圖。
 

